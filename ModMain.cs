@@ -35,12 +35,17 @@ namespace PatchQuestTrainer
             GUI.DragWindow(new Rect(0, 0, windowWidth, 20));
 
 
-            GUILayoutOption[] sliderOptions = { GUILayout.Width(100) };
+            GUILayoutOption[] sliderOptions = { GUILayout.Width(200) };
 
             Settings.invulnerable = GUILayout.Toggle(Settings.invulnerable, "Invulnerable (i)", null);
 
             GUILayout.Label($"Blaster Damage Scaling [{Settings.blasterDamageScaling}]", null);
             Settings.blasterDamageScaling = GUILayout.HorizontalSlider(Settings.blasterDamageScaling, 1f, 100f, sliderOptions);
+
+            if (GUILayout.Button("Set Ballooning (b)", sliderOptions))
+            {
+                PatchQuest.Player.P1.SetBallooning(true);
+            }
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -80,6 +85,10 @@ namespace PatchQuestTrainer
                 PatchQuest.Player.P2.GrantImmunity(1f);
             }
 
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                PatchQuest.Player.P1.SetBallooning(true);
+            }
         }
     }
 }
